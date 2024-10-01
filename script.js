@@ -49,39 +49,68 @@ const prevButton = document.querySelector('.prev');
 const nextButton = document.querySelector('.next');
 const dots = document.querySelectorAll('.dot');
 
-let index = 0;
-const cardWidth = cards[0].offsetWidth + 10;
+let index;
+window.innerWidth > 1080 ? index = 1 : index = 0;
+const cardWidth = window.innerWidth > 1080 ? cards[0].offsetWidth - 145 : cards[0].offsetWidth + 22;
+const totalCards = cards.length;
+
+const firstClone = cards[0].cloneNode(true);
+const lastClone = cards[totalCards - 1].cloneNode(true);
+
+carousel.appendChild(firstClone);
+carousel.insertBefore(lastClone, cards[0]);
+
+carousel.style.transform = `translateX(-${index * cardWidth}px)`;
 
 nextButton.addEventListener('click', () => {
-    if (index < cards.length - 1) {
-        index++;
-        updateCarousel();
-    }
+    if (index >= totalCards + 1) return;
+    index++;
+    updateCarousel();
 });
 
 prevButton.addEventListener('click', () => {
-    if (index > 0) {
-        index--;
-        updateCarousel();
-    }
+    if (index <= 0) return;
+    index--;
+    updateCarousel();
 });
 
 dots.forEach((dot, i) => {
     dot.addEventListener('click', () => {
-        index = i;
+        index = i + 1;
         updateCarousel();
     });
 });
 
 function updateCarousel() {
+    carousel.style.transition = 'transform 0.4s ease-in-out';
     carousel.style.transform = `translateX(-${index * cardWidth}px)`;
     updateDots();
+
+    carousel.addEventListener('transitionend', () => {
+        if (index === totalCards + 1) {
+            carousel.style.transition = 'none';
+            index = 1;
+            carousel.style.transform = `translateX(-${index * cardWidth}px)`;
+        } else if (index === 0) {
+            carousel.style.transition = 'none';
+            index = totalCards;
+            carousel.style.transform = `translateX(-${index * cardWidth}px)`;
+        }
+    });
 }
 
 function updateDots() {
     dots.forEach(dot => dot.classList.remove('active'));
-    dots[index].classList.add('active');
+    let activeIndex = index - 1;
+    if (index === 0) {
+        activeIndex = dots.length - 1;
+    } else if (index === totalCards + 1) {
+        activeIndex = 0;
+    }
+    dots[activeIndex].classList.add('active');
 }
+
+
 
 let currentIndex = 0;
 let intervalId;
