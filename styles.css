@@ -980,7 +980,7 @@ footer {
 
 @media (max-width: 576px) {
     .hr h1 {
-        font-size: 2.6rem !important;
+        font-size: 2.3rem !important;
     }
     .header{
         padding-left: 0 !important;
@@ -1107,7 +1107,7 @@ footer {
         padding-top: 5% !important;
     }
     .active li a{
-        font-size: 2.66rem !important;
+        font-size: 2.5rem !important;
     }
     .shop-now a{
         font-size: .8rem !important;
