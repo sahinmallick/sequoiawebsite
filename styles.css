@@ -993,7 +993,7 @@ footer {
         height: 80px !important;
     }
     .nav-container {
-        height: 62vh !important;
+        height: 67vh !important;
     }
     .box-container {
         gap: 8px !important;
@@ -1031,7 +1031,7 @@ footer {
         height: 220px !important;
     }
     .hero-r{
-        height: 35vh;
+        height: 40vh;
     }
     .hero-r h2 {
         font-size: 2.2rem !important;
@@ -1058,7 +1058,7 @@ footer {
     .newsletter-overlay {
         width: 76% !important;
         top: -270px !important;
-        height: 16vh;
+        height: 20vh;
     }
     .newsletter-overlay h2 {
         font-size: 1.3rem !important;
